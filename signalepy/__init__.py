@@ -1,3 +1,37 @@
+#!/usr/bin/env python
+
+
+"""
+
+	author: Shardul Nalegave
+	license:
+
+		MIT License
+
+		Copyright (c) 2018 Shardul Nalegave
+
+		Permission is hereby granted, free of charge, to any person obtaining a copy
+		of this software and associated documentation files (the "Software"), to deal
+		in the Software without restriction, including without limitation the rights
+		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+		copies of the Software, and to permit persons to whom the Software is
+		furnished to do so, subject to the following conditions:
+
+		The above copyright notice and this permission notice shall be included in all
+		copies or substantial portions of the Software.
+
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+		SOFTWARE.
+
+"""
+
+
+
 __version__ = '0.1.0'
 
 
@@ -202,18 +236,23 @@ class Signale:
 
 
 
-s = Signale()
-s.center("Testing Logger")
-s.simple("ABC", prefix="Debugger", suffix="xyz")
-s.info("Starting", prefix="Debugger")
-s.success("Started Successfully", prefix="Debugger", suffix="xyz")
-s.watch("Watching All Files", prefix="Debugger")
-s.error("Something Went Wrong", prefix="Debugger")
-s.warning("Deprecation Warning", prefix="Debugger")
-s.pending("Postponed", prefix="Debugger")
-s.debug("Found A Bug on L55", prefix="Debugger")
-s.start("Started New Process", prefix="Debugger")
-s.pause("Process Paused", prefix="Debugger")
-s.complete("Task Completed", prefix="Debugger")
-s.important("New Update Available. Please Update!", prefix="Debugger")
-s.stop("Stopping", prefix="Debugger")
+# s = Signale()
+# s.center("Testing Logger")
+# s.simple("ABC", prefix="Debugger", suffix="xyz")
+# s.info("Starting", prefix="Debugger")
+# s.success("Started Successfully", prefix="Debugger", suffix="xyz")
+# s.watch("Watching All Files", prefix="Debugger")
+# s.error("Something Went Wrong", prefix="Debugger")
+# s.warning("Deprecation Warning", prefix="Debugger")
+# s.pending("Postponed", prefix="Debugger")
+# s.debug("Found A Bug on L55", prefix="Debugger")
+# s.start("Started New Process", prefix="Debugger")
+# s.pause("Process Paused", prefix="Debugger")
+# s.complete("Task Completed", prefix="Debugger")
+# s.important("New Update Available. Please Update!", prefix="Debugger")
+# s.stop("Stopping", prefix="Debugger")
+
+# logger = Signale()
+# logger.success("Started Successfully", prefix="Debugger")
+# logger.warning("`a` function is deprecated", suffix="main.py")
+# logger.complete("Run Complete")

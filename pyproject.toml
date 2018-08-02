@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "signalepy"
+version = "0.1.0"
+description = "Elegant Console Logger For Python Command Line Apps"
+authors = ["Shardul Nalegave <nalegaveshardul40@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/ShardulNalegave/signale.py"
+keywords = [
+	"logger",
+	"cli",
+	"elegant",
+	"command-line",
+	"colored"
+]
+packages = [
+	{ include = "signalepy" }
+]
+
+[tool.poetry.dependencies]
+python = "3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"

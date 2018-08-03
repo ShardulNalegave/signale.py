@@ -42,43 +42,31 @@ from sys import platform, stdout
 
 class Signale:
 
-	def __init__(self):
+	def __init__(self, opts={"scope": None}):
+
+		scope = opts["scope"]
+
+		if scope != None:
+			self.scope = scope if scope != "" else "global"
+		else:
+			self.scope = None
+
 		if platform == "win32":
 			self.figures = {
 				"pause": "||",
 				"tick": '√',
 				"cross": '×',
 				"star": '*',
-				"square": '█',
-				"squareSmall": '[ ]',
 				"squareSmallFilled": '[█]',
 				"play": '►',
-				"circle": '( )',
-				"circleFilled": '(*)',
-				"circleDotted": '( )',
-				"circleDouble": '( )',
-				"circleCircle": '(○)',
-				"circleCross": '(×)',
-				"circlePipe": '(│)',
-				"circleQuestionMark": '(?)',
 				"bullet": '*',
-				"dot": '.',
-				"line": '─',
 				"ellipsis": '...',
-				"pointer": '>',
 				"pointerSmall": '»',
 				"info": 'i',
 				"warning": '‼',
-				"hamburger": '≡',
-				"smiley": '☺',
-				"mustache": '┌─┐',
+				"heart": '♥',
 				"radioOn": '(*)',
-				"radioOff": '( )',
-				"checkboxOn": '[×]',
-				"checkboxOff": '[ ]',
-				"checkboxCircleOn": '(×)',
-				"checkboxCircleOff": '( )',
-				"questionMarkPrefix": '？'
+				"radioOff": '( )'
 			}
 		else:
 			self.figures = {
@@ -86,41 +74,16 @@ class Signale:
 				"tick": '✔',
 				"cross": '✖',
 				"star": '★',
-				"square": '▇',
-				"squareSmall": '◻',
 				"squareSmallFilled": '◼',
 				"play": '▶',
-				"circle": '◯',
-				"circleFilled": '◉',
-				"circleDotted": '◌',
-				"circleDouble": '◎',
-				"circleCircle": 'ⓞ',
-				"circleCross": 'ⓧ',
-				"circlePipe": 'Ⓘ',
-				"circleQuestionMark": '?⃝',
 				"bullet": '●',
-				"dot": '․',
-				"line": '─',
 				"ellipsis": '…',
-				"pointer": '❯',
 				"pointerSmall": '›',
 				"info": 'ℹ',
 				"warning": '⚠',
-				"hamburger": '☰',
-				"smiley": '㋡',
-				"mustache": '෴',
 				"heart": '♥',
-				"arrowUp": '↑',
-				"arrowDown": '↓',
-				"arrowLeft": '←',
-				"arrowRight": '→',
 				"radioOn": '◉',
-				"radioOff": '◯',
-				"checkboxOn": '☒',
-				"checkboxOff": '☐',
-				"checkboxCircleOn": 'ⓧ',
-				"checkboxCircleOff": 'Ⓘ',
-				"questionMarkPrefix": '?⃝'
+				"radioOff": '◯'
 			}
 
 		self.colors = {
@@ -132,6 +95,7 @@ class Signale:
 			"dark blue": "\u001b[38;5;33m",
 			"cyan": "\u001b[36;1m",
 			"very light blue": "\u001b[38;5;39m",
+			"pink": "\u001b[38;5;198m",
 			"reset": "\u001b[0m"
 		}
 
@@ -149,6 +113,24 @@ class Signale:
 			message = f"  {text}"
 		if suffix != "":
 			message += f"   \u001b[38;5;245m-- {suffix}\u001b[0m"
+		if self.scope != None:
+			if isinstance(self.scope, list):
+				message = "   " + message
+				scopes = ""
+				for item in self.scope:
+					scopes += f" \u001b[38;5;248m[{item}]\u001b[0m"
+				if prefix == "":
+					pointer = self.figures["pointerSmall"]
+					message = f"  \u001b[38;5;248m{scopes} \u001b[38;5;248m{pointer}\u001b[0m" + message
+				else:
+					message = f" \u001b[38;5;248m{scopes}\u001b[0m" + message
+			else:
+				if prefix == "":
+					pointer = self.figures["pointerSmall"]
+					message = f"   \u001b[38;5;248m[{self.scope}] \u001b[38;5;248m{pointer}\u001b[0m" + message
+				else:
+					message = f"   \u001b[38;5;248m[{self.scope}]\u001b[0m" + message
+				# message = f"   \u001b[38;5;248m[{self.scope}]\u001b[0m" + message
 		return message
 
 	def simple(self, text="", prefix="", suffix=""):
@@ -197,7 +179,7 @@ class Signale:
 		print(message)
 
 	def pending(self, text="", prefix="", suffix=""):
-		icon = self.figures["circle"]
+		icon = self.figures["radioOff"]
 		text = "{}:  {}".format(self.coloured("purple", "{}  Pending".format(icon)), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
@@ -221,8 +203,14 @@ class Signale:
 		print(message)
 
 	def complete(self, text="", prefix="", suffix=""):
-		icon = self.figures["circleFilled"]
+		icon = self.figures["radioOn"]
 		text = "{}:  {}".format(self.coloured("very light blue", "{} Complete".format(icon)), text)
+		message = self.logger(text=text, prefix=prefix, suffix=suffix)
+		print(message)
+
+	def like(self, text="", prefix="", suffix=""):
+		icon = self.figures["heart"]
+		text = "{}:  {}".format(self.coloured("pink", "{} Like".format(icon)), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
@@ -250,9 +238,25 @@ class Signale:
 # s.pause("Process Paused", prefix="Debugger")
 # s.complete("Task Completed", prefix="Debugger")
 # s.important("New Update Available. Please Update!", prefix="Debugger")
+# s.like("I Love Signale", prefix="Debugger")
 # s.stop("Stopping", prefix="Debugger")
 
-# logger = Signale()
+# print("\n")
+
+# logger = Signale("")
 # logger.success("Started Successfully", prefix="Debugger")
 # logger.warning("`a` function is deprecated", suffix="main.py")
 # logger.complete("Run Complete")
+
+# print("\n")
+
+# logger = Signale("custom")
+# logger.success("Started Successfully", prefix="Debugger")
+# logger.warning("`a` function is deprecated", suffix="main.py")
+# logger.complete("Run Complete")
+
+# logger = Signale({
+# 	"scope": ["global scope", "inner scope"]
+# 	# "scope": "global scope"
+# })
+# logger.success("Scoped Logger Works!")

@@ -79,6 +79,7 @@ This will produce the following result:-
 - `debug`
 - `pause`
 - `info`
+- `like`
 - `center`
 
 </details>
@@ -89,43 +90,109 @@ This will produce the following result:-
 
 
 
+## Scoped Loggers
+To create scoped loggers, define the `scope` field in the `options` argument of constructor like:-
+
+````python
+
+	from signalepy import Signale
+
+    logger = Signale({
+    	"scope": "global scope"
+    })
+    logger.success("Scoped Logger Works!")
+
+````
+
+This will produce the following result:-
+
+<div align="center">
+	<img src="./imgs/scope_str.png" align="center">
+</div>
+
+<br><br>
+
+You also create multiple scopes by setting the `scope` field to a list of strings like:-
+
+````python
+
+	from signalepy import Signale
+
+    logger = Signale({
+    	"scope": ["global scope", "inner scope"]
+    })
+    logger.success("Scoped Logger Works!")
+
+````
+
+This will produce the following result:-
+
+<div align="center">
+	<img src="./imgs/scope_list.png" align="center">
+</div>
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+
 ## API
 
-signalepy.`<logger>(message="", prefix="", suffix="")`
+1. logger = `Signale(<options>)`
 
-<br>
+	<br>
 
-`logger`
+	`Signale`
 
-- Type: `function`
+	- Type: `class`
 
-Can be any default logger
+	Signale class imported from `signalepy` module
 
-<br>
+	<br>
 
-`message`
+	`options`
 
-- Type: `str`
+	- Type: `dict`
 
-Message to be displayed
+	Options Dictionary for logger.
 
-<br>
+	<br><br>
 
-`prefix`
+2. logger.`<logger>(message="", prefix="", suffix="")`
 
-- Type: `str`
-- Required: False
+	<br>
 
-Prefix text
+	`logger`
 
-<br>
+	- Type: `function`
 
-`suffix`
+	Can be any default logger
 
-- Type: `str`
-- Required: False
+	<br>
 
-Suffix text
+	`message`
+
+	- Type: `str`
+
+	Message to be displayed
+
+	<br>
+
+	`prefix`
+
+	- Type: `str`
+	- Required: False
+
+	Prefix text
+
+	<br>
+
+	`suffix`
+
+	- Type: `str`
+	- Required: False
+
+	Suffix text
 
 
 

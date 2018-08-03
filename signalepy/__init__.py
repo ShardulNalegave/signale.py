@@ -45,8 +45,16 @@ class Signale:
 	def __init__(self, opts={"scope": None}):
 
 		self.options = opts
-		scope = opts["scope"]
 
+		try:
+			self.custom_loggers_conf = opts["custom"]
+			for conf in self.custom_loggers_conf:
+				func = lambda text="", prefix="", suffix="": self.log(text, prefix, suffix, conf)
+				setattr(self, conf["name"], func)
+		except KeyError:
+			pass
+
+		scope = opts["scope"]
 		if scope != None:
 			self.scope = scope if scope != "" else "global"
 		else:
@@ -133,6 +141,11 @@ class Signale:
 					message = f"   \u001b[38;5;248m[{self.scope}]\u001b[0m" + message
 				# message = f"   \u001b[38;5;248m[{self.scope}]\u001b[0m" + message
 		return message
+
+	def log(self, text="", prefix="", suffix="", conf={}):
+		text = "{}:  {}".format(self.coloured(conf["color"], "{} {}".format(conf["badge"], conf["label"])), text)
+		message = self.logger(text, prefix, suffix)
+		print(message)
 
 	def simple(self, text="", prefix="", suffix=""):
 		print(self.logger(text, prefix, suffix))
@@ -271,11 +284,19 @@ class Signale:
 # logger.warning("`a` function is deprecated", suffix="main.py")
 # logger.complete("Run Complete")
 
-logger = Signale({
-	# "scope": ["global scope", "inner scope"]
-	"scope": "global scope"
-})
-# logger.success("Scoped Logger Works!")
+# logger = Signale({
+# 	"scope": "global scope",
+# 	"custom": [
+# 		{
+# 			"badge": "!",
+# 			"label": "Attention",
+# 			"color": "red",
+# 			"name": "attention"
+# 		}
+# 	]
+# })
 
-logger2 = logger.scoped("inner")
-logger2.like("I love Signale.py", prefix="Shardul Nalegave", suffix="Creator")
+# logger2 = logger.scoped("inner")
+
+# logger.attention("It Works!")
+# logger2.attention("With Logger2")

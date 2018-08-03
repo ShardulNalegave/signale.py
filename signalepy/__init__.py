@@ -44,6 +44,7 @@ class Signale:
 
 	def __init__(self, opts={"scope": None}):
 
+		self.options = opts
 		scope = opts["scope"]
 
 		if scope != None:
@@ -222,6 +223,21 @@ class Signale:
 		message = " " * ((cols - len_text) // 2) + text + " " * ((cols - len_text) // 2)
 		print(message)
 
+	def scoped(self, scope):
+		opts = self.options
+		if self.scope != None:
+			if isinstance(self.scope, list):
+				opts["scope"] = opts["scope"].append(scope)
+				return Signale(opts)
+			else:
+				opts["scope"] = [self.scope, scope]
+				return Signale(opts)
+			return Signale()
+		else:
+			opts["scope"] = scope
+			return Signale(opts)
+		return Signale()
+
 
 
 # s = Signale()
@@ -255,8 +271,11 @@ class Signale:
 # logger.warning("`a` function is deprecated", suffix="main.py")
 # logger.complete("Run Complete")
 
-# logger = Signale({
-# 	"scope": ["global scope", "inner scope"]
-# 	# "scope": "global scope"
-# })
+logger = Signale({
+	# "scope": ["global scope", "inner scope"]
+	"scope": "global scope"
+})
 # logger.success("Scoped Logger Works!")
+
+logger2 = logger.scoped("inner")
+logger2.like("I love Signale.py", prefix="Shardul Nalegave", suffix="Creator")

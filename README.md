@@ -131,6 +131,33 @@ This will produce the following result:-
 	<img src="./imgs/scope_list.png" align="center">
 </div>
 
+<br><br><br>
+
+You can also create scoped a logger which is just clone of other by using by using the `scoped` function like this:-
+
+````python
+
+	from signalepy import Signale
+
+	logger = Signale({
+		"scope": "global scope"
+	})
+
+	logger2 = logger.scoped("inner")
+	logger2.like("I love Signale.py", prefix="Shardul Nalegave", suffix="Creator")
+
+````
+
+This will produce the following result:-
+
+<div align="center">
+	<img src="./imgs/scoped_func.png" align="center">
+</div>
+
+<br>
+
+**Note:-** All the configuration will be copied to the new logger just the scope will be extended.
+
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -155,6 +182,12 @@ This will produce the following result:-
 	- Type: `dict`
 
 	Options Dictionary for logger.
+
+	<br>
+
+	- Returns: Signale Logger Object
+
+	Logger object which can be used for logging
 
 	<br><br>
 
@@ -193,6 +226,38 @@ This will produce the following result:-
 	- Required: False
 
 	Suffix text
+
+	<br>
+
+	- Returns: `None`
+
+	<br><br>
+
+3. logger2 = `logger`.scoped(`<new scope>`)
+
+	<br>
+
+	`logger`
+
+	- Type: Signale Logger Object
+
+	Parent Logger
+
+	<br>
+
+	`new scope`
+
+	- Type: `str`
+
+	New Scope Name
+
+	<br>
+
+	- Returns: Signale Logger Object
+
+	Clone Logger object with extended scope
+
+	<br><br>
 
 
 

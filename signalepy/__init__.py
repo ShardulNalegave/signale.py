@@ -42,7 +42,7 @@ from sys import platform, stdout
 
 class Signale:
 
-	def __init__(self, opts={"scope": None}):
+	def __init__(self, opts={"scope": None, "underlined": False}):
 
 		self.options = opts
 
@@ -54,10 +54,18 @@ class Signale:
 		except KeyError:
 			pass
 
-		scope = opts["scope"]
-		if scope != None:
-			self.scope = scope if scope != "" else "global"
-		else:
+		try:
+			self.underlined = opts["underlined"]
+		except KeyError:
+			self.underlined = False
+
+		try:
+			scope = opts["scope"]
+			if scope != None:
+				self.scope = scope if scope != "" else "global"
+			else:
+				self.scope = None
+		except KeyError:
 			self.scope = None
 
 		if platform == "win32":
@@ -113,6 +121,13 @@ class Signale:
 		reset = self.colors["reset"]
 		return f"{color}{text}{reset}"
 
+	def logger_label(self, color, icon, label):
+		if self.underlined == True:
+			label = f"\u001b[4m{label}\u001b[0m"
+		label = f"\u001b[1m{label}\u001b[0m"
+		label = self.coloured(color, "{} {}".format(icon, label))
+		return label
+
 	def logger(self, text="", prefix="", suffix=""):
 		message = ""
 		if prefix != "":
@@ -143,7 +158,7 @@ class Signale:
 		return message
 
 	def log(self, text="", prefix="", suffix="", conf={}):
-		text = "{}:  {}".format(self.coloured(conf["color"], "{} {}".format(conf["badge"], conf["label"])), text)
+		text = "{}:  {}".format(self.logger_label(conf["color"], conf["badge"], "{}".format(conf["label"])), text)
 		message = self.logger(text, prefix, suffix)
 		print(message)
 
@@ -152,79 +167,79 @@ class Signale:
 
 	def success(self, text="", prefix="", suffix=""):
 		tick = self.figures["tick"]
-		text = "{}:  {}".format(self.coloured("green", "{} Success".format(tick)), text)
+		text = "{}:  {}".format(self.logger_label("green", tick, "Success"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def start(self, text="", prefix="", suffix=""):
 		icon = self.figures["play"]
-		text = "{}:  {}".format(self.coloured("green", "{} Start".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("green", icon, "Start"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def error(self, text="", prefix="", suffix=""):
 		cross = self.figures["cross"]
-		text = "{}:  {}".format(self.coloured("red", "{} Error".format(cross)), text)
+		text = "{}:  {}".format(self.logger_label("red", cross, "Error"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def warning(self, text="", prefix="", suffix=""):
 		icon = self.figures["warning"]
-		text = "{}:  {}".format(self.coloured("yellow", "{} Warning".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("yellow", icon, "Warning"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def watch(self, text="", prefix="", suffix=""):
 		icon = self.figures["ellipsis"]
-		text = "{}:  {}".format(self.coloured("yellow", "{} Watching".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("yellow", icon, "Watching"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def stop(self, text="", prefix="", suffix=""):
 		icon = self.figures["squareSmallFilled"]
-		text = "{}:  {}".format(self.coloured("red", "{} Stop".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("red", icon, "Stop"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def important(self, text="", prefix="", suffix=""):
 		icon = self.figures["star"]
-		text = "{}:  {}".format(self.coloured("yellow", "{} Important".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("yellow", icon, "Important"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def pending(self, text="", prefix="", suffix=""):
 		icon = self.figures["radioOff"]
-		text = "{}:  {}".format(self.coloured("purple", "{}  Pending".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("purple", icon, "Pending"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def debug(self, text="", prefix="", suffix=""):
 		icon = self.figures["squareSmallFilled"]
-		text = "{}:  {}".format(self.coloured("dark blue", "{} Debug".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("dark blue", icon, "Debug"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def info(self, text="", prefix="", suffix=""):
 		icon = self.figures["info"]
-		text = "{}:  {}".format(self.coloured("cyan", "{} Info".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("cyan", icon, "Info"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def pause(self, text="", prefix="", suffix=""):
 		icon = self.figures["pause"]
-		text = "{}:  {}".format(self.coloured("yellow", "{} Pause".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("yellow", icon, "Pause"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def complete(self, text="", prefix="", suffix=""):
 		icon = self.figures["radioOn"]
-		text = "{}:  {}".format(self.coloured("very light blue", "{} Complete".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("very light blue", icon, "Complete"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
 	def like(self, text="", prefix="", suffix=""):
 		icon = self.figures["heart"]
-		text = "{}:  {}".format(self.coloured("pink", "{} Like".format(icon)), text)
+		text = "{}:  {}".format(self.logger_label("pink", icon, "Like"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
@@ -253,7 +268,9 @@ class Signale:
 
 
 
-# s = Signale()
+# s = Signale({
+# 	"underlined": False
+# })
 # s.center("Testing Logger")
 # s.simple("ABC", prefix="Debugger", suffix="xyz")
 # s.info("Starting", prefix="Debugger")
@@ -295,7 +312,8 @@ class Signale:
 # 			"color": "red",
 # 			"name": "attention"
 # 		}
-# 	]
+# 	],
+# 	"underlined": True
 # })
 
 # logger2 = logger.scoped("inner")

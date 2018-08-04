@@ -195,6 +195,45 @@ This will produce the following result:-
 	<img src="./imgs/custom.png" align="center">
 </div>
 
+----------------------------------------------------------------------------------------------------------
+
+
+
+## Underlined Labels
+You can set labels to be underlined by setting the `underlined` field to `True` in the options passed to the constructor. For example:-
+
+````python
+
+from signalepy import Signale
+
+s = Signale({
+	"underlined": True
+})
+s.center("Testing Logger")
+s.simple("ABC", prefix="Debugger", suffix="xyz")
+s.info("Starting", prefix="Debugger")
+s.success("Started Successfully", prefix="Debugger", suffix="xyz")
+s.watch("Watching All Files", prefix="Debugger")
+s.error("Something Went Wrong", prefix="Debugger")
+s.warning("Deprecation Warning", prefix="Debugger")
+s.pending("Postponed", prefix="Debugger")
+s.debug("Found A Bug on L55", prefix="Debugger")
+s.start("Started New Process", prefix="Debugger")
+s.pause("Process Paused", prefix="Debugger")
+s.complete("Task Completed", prefix="Debugger")
+s.important("New Update Available. Please Update!", prefix="Debugger")
+s.like("I Love Signale", prefix="Debugger")
+s.stop("Stopping", prefix="Debugger")
+
+````
+
+This will produce the following result:-
+
+<div align="center">
+	<img src="./imgs/underlined.png" align="center">
+</div>
+
+
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -212,6 +251,14 @@ Options taken by constructor
 	Signale Logger Scope
 
 	<br><br>
+
+3. `underlined`
+
+	<br>
+
+	- Type: `bool`
+
+	Labels Should Be Underlined Or Not
 
 2. `custom`
 
@@ -261,6 +308,8 @@ Options taken by constructor
 				- `yellow`
 				- `cyan`
 				- `reset` (color reset code)
+
+	<br><br>
 
 
 

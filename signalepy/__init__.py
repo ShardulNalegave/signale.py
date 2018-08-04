@@ -253,24 +253,24 @@ class Signale:
 
 
 
-s = Signale()
-s.center("Testing Logger")
-s.simple("ABC", prefix="Debugger", suffix="xyz")
-s.info("Starting", prefix="Debugger")
-s.success("Started Successfully", prefix="Debugger", suffix="xyz")
-s.watch("Watching All Files", prefix="Debugger")
-s.error("Something Went Wrong", prefix="Debugger")
-s.warning("Deprecation Warning", prefix="Debugger")
-s.pending("Postponed", prefix="Debugger")
-s.debug("Found A Bug on L55", prefix="Debugger")
-s.start("Started New Process", prefix="Debugger")
-s.pause("Process Paused", prefix="Debugger")
-s.complete("Task Completed", prefix="Debugger")
-s.important("New Update Available. Please Update!", prefix="Debugger")
-s.like("I Love Signale", prefix="Debugger")
-s.stop("Stopping", prefix="Debugger")
+# s = Signale()
+# s.center("Testing Logger")
+# s.simple("ABC", prefix="Debugger", suffix="xyz")
+# s.info("Starting", prefix="Debugger")
+# s.success("Started Successfully", prefix="Debugger", suffix="xyz")
+# s.watch("Watching All Files", prefix="Debugger")
+# s.error("Something Went Wrong", prefix="Debugger")
+# s.warning("Deprecation Warning", prefix="Debugger")
+# s.pending("Postponed", prefix="Debugger")
+# s.debug("Found A Bug on L55", prefix="Debugger")
+# s.start("Started New Process", prefix="Debugger")
+# s.pause("Process Paused", prefix="Debugger")
+# s.complete("Task Completed", prefix="Debugger")
+# s.important("New Update Available. Please Update!", prefix="Debugger")
+# s.like("I Love Signale", prefix="Debugger")
+# s.stop("Stopping", prefix="Debugger")
 
-print("\n")
+# print("\n")
 
 # logger = Signale({
 # 	"scope": ""

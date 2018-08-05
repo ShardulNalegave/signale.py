@@ -111,7 +111,7 @@ class Signale:
 			"purple": "\u001b[38;5;127m",
 			"dark blue": "\u001b[38;5;33m",
 			"cyan": "\u001b[36;1m",
-			"very light blue": "\u001b[38;5;39m",
+			"blue": "\u001b[38;5;39m",
 			"pink": "\u001b[38;5;198m",
 			"reset": "\u001b[0m"
 		}
@@ -254,7 +254,7 @@ class Signale:
 
 	def complete(self, text="", prefix="", suffix=""):
 		icon = self.figures["radioOn"]
-		text = "{}:  {}".format(self.logger_label("very light blue", icon, "Complete"), text)
+		text = "{}:  {}".format(self.logger_label("blue", icon, "Complete"), text)
 		message = self.logger(text=text, prefix=prefix, suffix=suffix)
 		print(message)
 
@@ -399,3 +399,23 @@ class Signale:
 # print(logger.bold("Bold Text"))
 # print(logger.underline("Underlined"))
 # print(logger.reversed("Reversed"))
+
+
+# logger = Signale() # Option can be passed to the constructor
+# logger.info("Signale.py is amazing", prefix="Logger")
+
+# logger = Signale({
+# 	"scope": "global scope",
+# 	"custom": [
+# 		{
+# 			"badge": "!",
+# 			"label": "Attention",
+# 			"color": "red",
+# 			"name": "attention"
+# 		}
+# 	],
+# 	"underlined": False
+# })
+
+# logger.attention("It Works!")
+# logger.scoped("inner").attention("Salute Signale.py")

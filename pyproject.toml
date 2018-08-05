@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "signalepy"
-version = "0.3.5"
+version = "0.3.6"
 description = "Elegant Console Logger For Python Command Line Apps"
 authors = ["Shardul Nalegave <nalegaveshardul40@gmail.com>"]
 license = "MIT"
@@ -21,4 +21,3 @@ packages = [
 python = "3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"

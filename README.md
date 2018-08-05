@@ -304,7 +304,7 @@ Options taken by constructor
 
 				- `red`
 				- `dark`
-				- `very light blue`
+				- `blue`
 				- `pink`
 				- `green`
 				- `grey`

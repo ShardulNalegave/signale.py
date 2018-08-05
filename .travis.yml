@@ -1,0 +1,18 @@
+
+language: python
+python: 3.6
+
+
+before_deploy:
+  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Stating Deploy\u001b[0m"
+  - poetry build
+  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Built Files\u001b[0m"
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: ${GH_TOKEN}
+  file: dist/*
+
+after_deploy:
+  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Finished Deploy\u001b[0m"

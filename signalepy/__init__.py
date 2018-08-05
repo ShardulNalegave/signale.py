@@ -116,10 +116,31 @@ class Signale:
 			"reset": "\u001b[0m"
 		}
 
+		self.txt_decorations = {
+			"bold": "\u001b[1m",
+			"underline": "\u001b[4m",
+			"reversed": "\u001b[7m"
+		}
+
+	def bold(self, text):
+		bold = self.txt_decorations["bold"]
+		reset = self.colors["reset"]
+		return f"{bold}{text}{reset}"
+
+	def underline(self, text):
+		underline = self.txt_decorations["underline"]
+		reset = self.colors["reset"]
+		return f"{underline}{text}{reset}"
+
 	def coloured(self, color, text):
 		color = self.colors[color]
 		reset = self.colors["reset"]
 		return f"{color}{text}{reset}"
+
+	def reversed(self, text):
+		reversed = self.txt_decorations["reversed"]
+		reset = self.colors["reset"]
+		return f"{reversed}{text}{reset}"
 
 	def logger_label(self, color, icon, label):
 		if self.underlined == True:
@@ -266,6 +287,45 @@ class Signale:
 			return Signale(opts)
 		return Signale()
 
+	def ask(self, questions=[]):
+		answers = {}
+		for q in questions:
+			qtype = ""
+			qreq = ""
+			try:
+				qtype = q["type"]
+			except KeyError:
+				qtype = "input"
+			try:
+				qreq = q["required"]
+			except KeyError:
+				qreq = False
+			if qtype == "input":
+				ans = ""
+				try:
+					ans = input(self.coloured("yellow", "  ? {}: ".format(q["message"])) + self.colors["cyan"])
+				except KeyboardInterrupt:
+					stdout.write(self.colors["reset"])
+					stdout.write("\n")
+					stdout.flush()
+					KeyboardInterrupt()
+				except EOFError:
+					stdout.write(self.colors["reset"])
+					stdout.write("\n")
+					stdout.flush()
+				stdout.write(self.colors["reset"])
+				stdout.flush()
+				if ans == "" and qreq == True:
+					while ans == "":
+						ans = self.ask([q])
+				if isinstance(ans, str):
+					answers[q["name"]] = ans
+				elif isinstance(ans, dict):
+					while isinstance(ans, dict):
+						ans = ans[q["name"]]
+					answers[q["name"]] = ans
+		return answers
+
 
 
 # s = Signale({
@@ -320,3 +380,22 @@ class Signale:
 
 # logger.attention("It Works!")
 # logger2.attention("With Logger2")
+
+
+# logger = Signale()
+# ans = logger.ask([
+# 	{
+# 		"type": "input",
+# 		"name": "username",
+# 		"message": "Your Name",
+# 		"required": True
+# 	}
+# ])
+
+# print(logger.bold(logger.coloured("pink", ans)))
+
+# print("\n\n")
+
+# print(logger.bold("Bold Text"))
+# print(logger.underline("Underlined"))
+# print(logger.reversed("Reversed"))

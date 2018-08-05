@@ -81,6 +81,10 @@ This will produce the following result:-
 - `info`
 - `like`
 - `center`
+- `bold`
+- `underline`
+- `reversed`
+- `coloured`
 
 </details>
 

@@ -9,9 +9,10 @@ install:
 
 
 before_deploy:
-  - echo "ℹ Info - Stating Deploy"
+  - git config --local user.name "YOUR GIT USER NAME"
+  - git config --local user.email "YOUR GIT USER EMAIL"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
   - poetry build
-  - echo "ℹ Info - Built Files"
 
 deploy:
   provider: releases

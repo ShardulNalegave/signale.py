@@ -1,14 +1,17 @@
 
 language: python
 python: 3.6
+
 script:
-  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Running\u001b[0m"
+  - echo "Running"
+install:
+  - pip install --user poetry
 
 
 before_deploy:
-  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Stating Deploy\u001b[0m"
+  - echo "ℹ Info - Stating Deploy"
   - poetry build
-  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Built Files\u001b[0m"
+  - echo "ℹ Info - Built Files"
 
 deploy:
   provider: releases
@@ -17,4 +20,4 @@ deploy:
   file: dist/*
 
 after_deploy:
-  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Finished Deploy\u001b[0m"
+  - echo "ℹ Info - Finished Deploy"

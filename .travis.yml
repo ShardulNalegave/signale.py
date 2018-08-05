@@ -5,7 +5,7 @@ python: 3.6
 script:
   - echo "Running"
 install:
-  - pip install --user poetry
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
 
 before_deploy:

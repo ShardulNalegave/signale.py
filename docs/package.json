@@ -4,7 +4,7 @@
   "description": "Documentation For Signale.py",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vuepress build",
     "dev": "vuepress dev"
   },
   "author": "Shardul Nalegave <nalegaveshardul40@gmail.com>",

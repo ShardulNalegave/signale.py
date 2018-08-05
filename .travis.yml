@@ -2,7 +2,7 @@
 language: python
 python: 3.6
 script:
-  - pytest
+  - echo "\u001b[36;1m  ℹ\u001b[0m Info - Running\u001b[0m"
 
 
 before_deploy:

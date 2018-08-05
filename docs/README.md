@@ -13,6 +13,7 @@ features:
   details: A huge list of Default Loggers and Text Formatters
 footer: MIT Licensed | Copyright © 2018 Shardul Nalegave
 sidebar: false
+editLink: false
 
 ---
 

@@ -4,14 +4,28 @@ module.exports = {
 	title: "Signale.py",
 	description: "Elegant Console Logger For Python Command Line Apps",
 
+	head: [
+
+		["link", {rel: "icon", href: "/hero.png"}]
+
+	],
+
 	themeConfig: {
+
+		repo: "ShardulNalegave/signale.py",
+		repoLabel: "GitHub",
+
+		docsRepo: "ShardulNalegave/signale.py",
+		docsBranch: "master",
+		docsDir: "docs",
+
+		editLinks: true,
+		editLinkText: "Edit This Page On GitHub",
 
 		nav: [
 
 			{text: "Home", link: "/"},
-			{text: "Guide", link: "/docs/"},
-
-			{text: "GitHub", link: "https://github.com/ShardulNalegave/signale.py"}
+			{text: "Guide", link: "/docs/"}
 
 		],
 

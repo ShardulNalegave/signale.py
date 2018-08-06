@@ -411,17 +411,17 @@ class Signale:
 # logger2.attention("With Logger2")
 
 
-logger = Signale()
-ans = logger.ask([
-	{
-		"type": "input",
-		"name": "username",
-		"message": "Your Name",
-		"default": "Shardul"
-	}
-])
+# logger = Signale()
+# ans = logger.ask([
+# 	{
+# 		"type": "input",
+# 		"name": "username",
+# 		"message": "Your Name",
+# 		"default": "Shardul"
+# 	}
+# ])
 
-print(logger.bold(logger.coloured("pink", ans)))
+# print(logger.bold(logger.coloured("pink", ans)))
 
 # print("\n\n")
 

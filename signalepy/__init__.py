@@ -292,6 +292,7 @@ class Signale:
 		for q in questions:
 			qtype = ""
 			qreq = ""
+			qdef = ""
 			try:
 				qtype = q["type"]
 			except KeyError:
@@ -300,30 +301,58 @@ class Signale:
 				qreq = q["required"]
 			except KeyError:
 				qreq = False
+			try:
+				qdef = q["default"]
+			except KeyError:
+				qdef = ""
 			if qtype == "input":
-				ans = ""
-				try:
-					ans = input(self.coloured("yellow", "  ? {}: ".format(q["message"])) + self.colors["cyan"])
-				except KeyboardInterrupt:
+				if qdef == "":
+					ans = ""
+					try:
+						ans = input(self.coloured("yellow", "  ? {}: ".format(q["message"])) + self.colors["cyan"])
+					except KeyboardInterrupt:
+						stdout.write(self.colors["reset"])
+						stdout.write("\n")
+						stdout.flush()
+						KeyboardInterrupt()
+					except EOFError:
+						stdout.write(self.colors["reset"])
+						stdout.write("\n")
+						stdout.flush()
 					stdout.write(self.colors["reset"])
-					stdout.write("\n")
 					stdout.flush()
-					KeyboardInterrupt()
-				except EOFError:
+					if ans == "" and qreq == True:
+						while ans == "":
+							ans = self.ask([q])
+					if isinstance(ans, str):
+						answers[q["name"]] = ans
+					elif isinstance(ans, dict):
+						while isinstance(ans, dict):
+							ans = ans[q["name"]]
+						answers[q["name"]] = ans
+				else:
+					ans = ""
+					try:
+						ans = input(self.coloured("yellow", "  ? {} ".format(q["message"])) + self.coloured("pink", "({})".format(qdef)) + ": " + self.colors["cyan"])
+					except KeyboardInterrupt:
+						stdout.write(self.colors["reset"])
+						stdout.write("\n")
+						stdout.flush()
+						KeyboardInterrupt()
+					except EOFError:
+						stdout.write(self.colors["reset"])
+						stdout.write("\n")
+						stdout.flush()
 					stdout.write(self.colors["reset"])
-					stdout.write("\n")
 					stdout.flush()
-				stdout.write(self.colors["reset"])
-				stdout.flush()
-				if ans == "" and qreq == True:
-					while ans == "":
-						ans = self.ask([q])
-				if isinstance(ans, str):
-					answers[q["name"]] = ans
-				elif isinstance(ans, dict):
-					while isinstance(ans, dict):
-						ans = ans[q["name"]]
-					answers[q["name"]] = ans
+					if ans == "":
+						ans = qdef
+					if isinstance(ans, str):
+						answers[q["name"]] = ans
+					elif isinstance(ans, dict):
+						while isinstance(ans, dict):
+							ans = ans[q["name"]]
+						answers[q["name"]] = ans
 		return answers
 
 
@@ -382,17 +411,17 @@ class Signale:
 # logger2.attention("With Logger2")
 
 
-# logger = Signale()
-# ans = logger.ask([
-# 	{
-# 		"type": "input",
-# 		"name": "username",
-# 		"message": "Your Name",
-# 		"required": True
-# 	}
-# ])
+logger = Signale()
+ans = logger.ask([
+	{
+		"type": "input",
+		"name": "username",
+		"message": "Your Name",
+		"default": "Shardul"
+	}
+])
 
-# print(logger.bold(logger.coloured("pink", ans)))
+print(logger.bold(logger.coloured("pink", ans)))
 
 # print("\n\n")
 

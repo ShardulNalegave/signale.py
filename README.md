@@ -1,6 +1,6 @@
 
 <div align="center">
-	<h1 align="center"><a href="https://signale.netlify.com">Signale.py</a></h1>
+	<h1 align="center">Signale.py</h1>
 	<p align="center">Elegant Console Logger For Python Command-Line Apps</p>
 	<br>
 	<br>

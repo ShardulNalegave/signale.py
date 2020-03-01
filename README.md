@@ -418,10 +418,3 @@ Options taken by constructor
 	<br><br>
 
 
-
-----------------------------------------------------------------------------------------------------------
-
-
-
-**Licensed Under [MIT License](https://github.com/ShardulNalegave/signale.py/blob/master/LICENSE)**
-**A Project By [Shardul Nalegave](https://shardul.netlify.com)**
